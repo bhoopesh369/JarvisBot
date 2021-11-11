@@ -2,8 +2,8 @@
 import telebot
 import yfinance as yf
 
-API_KEY = "2089092326:AAEmGJZwscquf99EMpgQuY89omPfqHMacks"
-bot = telebot.TeleBot(API_KEY)
+TOKEN = "2089092326:AAEmGJZwscquf99EMpgQuY89omPfqHMacks"
+bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['Greet'])
 def greet(message):
