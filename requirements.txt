@@ -1,4 +1,4 @@
 pytelegrambotapi
 gtts
 praw
-yahoo_finanace
+yfinanace
