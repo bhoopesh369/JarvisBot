@@ -1,5 +1,3 @@
 pytelegrambotapi
 gtts
 praw
-os
-yfinance
