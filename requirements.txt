@@ -2,3 +2,7 @@ pytelegrambotapi
 gtts
 praw
 yfinance
+PIL
+random
+requests
+io
