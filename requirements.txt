@@ -2,7 +2,6 @@ pytelegrambotapi
 gtts
 praw
 yfinance
-PIL
-random
+pillow
 requests
-io
+
