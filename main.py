@@ -6,6 +6,8 @@ from io import BytesIO
 import random
 import praw
 
+# Random links 
+
 TOKEN = "2089092326:AAEmGJZwscquf99EMpgQuY89omPfqHMacks"
 bot = telebot.TeleBot(TOKEN)
 
@@ -25,18 +27,46 @@ def get_post(rddt, sbrddt, first_x_posts=100):
     return post
 
 
+# General
+
 @bot.message_handler(commands=['start'])
 def start(message):
   print(message.text)
 
-@bot.message_handler(commands=['greet','hello','hi'])
+@bot.message_handler(commands=['greet','hello','hi','hey'])
 def hello(message):
   bot.send_message(message.chat.id, "Hey! Hows it going?")
+  
+@bot.message_handler(commands=['fck','you suck','fuck','bitch','])
+def mes1(message):
+  bot.send_message(message.chat.id, "Sorry , you are banned")  
+  bot.send_message(message.chat.id, "BAd words not tolerated")    
+   # banning the usetr                             
+  ban_chat_member(chat_id: message.chat.id , user_id: message.text.split()[1] , until_date: datetime.datetime )       
+                               
 
-@bot.message_handler(commands=['image','img'])
+                               
+# To ban a User by calling his id  (Format Ban user_id)
+
+def ban_request(message):
+  request = message.text.split()
+  if len(request) < 2 or request[0].lower() not in "ban":
+    return False
+  else:
+    return True
+  
+ @bot.message_handler(function=ban_request)
+def userban(message):
+    ban_chat_member(chat_id: message.chat.id , user_id: message.text.split()[1] , until_date: datetime.datetime ) 
+
+
+@bot.message_handler(commands=['image','cat'])
 def image(message):
   img = open("cat.jpg", "rb")
   bot.send_photo(message.chat.id, img)
+  
+  
+# Media  
 
 @bot.message_handler(commands=["randimg",'imgnet'])
 def imagenet(message):
@@ -44,10 +74,14 @@ def imagenet(message):
   imgnet= Image.open(BytesIO(response.content))
   bot.send_photo(message.chat.id, imgnet)
 
-@bot.message_handler(commands=['vid','video'])
+@bot.message_handler(commands=['vid','video','Porn'])
 def video(message):
   vid= open("GPNAKKU.mp4", "rb")
   bot.send_video(message.chat.id,vid)
+  
+  
+# Stocks
+  
 
 @bot.message_handler(commands=['wsb'])
 def get_stocks(message):
@@ -76,6 +110,7 @@ def get_stocks(message):
   print(response)
   bot.send_message(message.chat.id, response)
   
+
 def stock_request(message):
   request = message.text.split()
   if len(request) < 2 or request[0].lower() not in "price":
@@ -97,6 +132,9 @@ def send_price(message):
   pass
 
 
+# Reddit 
+# this thing was a copy paste from someones code
+
 @bot.message_handler(commands=["reddit", "r"])
 def send_post(message):
     post = get_post(rddt=reddit, sbrddt="askreddit")
@@ -107,6 +145,8 @@ def send_post(message):
     except Exception as e:
         if "cannot identify image file <_io.BytesIO object at" in str(e):
          bot.send_message(message.chat.id, f"{post.url}\n{post.title}")
+
+# bot end 
 
 
 bot.polling() 
