@@ -37,13 +37,16 @@ def start(message):
 def hello(message):
   bot.send_message(message.chat.id, "Hey! Hows it going?")
   
-@bot.message_handler(commands=['fck','you suck','fuck','bitch','])
+@bot.message_handler(commands=['fck','you suck','fuck','bitch'])
 def mes1(message):
   bot.send_message(message.chat.id, "Sorry , you are banned")  
   bot.send_message(message.chat.id, "BAd words not tolerated")    
    # banning the usetr                             
   ban_chat_member(chat_id: message.chat.id , user_id: message.text.split()[1] , until_date: datetime.datetime )       
-                               
+
+@bot.message_handler(commands=['thanks','thank','grateful'])
+def hello(message):
+  bot.send_message(message.chat.id, "ur karma went up by 1 ++")      
 
                                
 # To ban a User by calling his id  (Format Ban user_id)
